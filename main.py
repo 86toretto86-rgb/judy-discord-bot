@@ -142,7 +142,7 @@ async def on_ready():
     # Zeitgesteuerte Nachrichten
     scheduler.add_job(lambda: send_random_message(morning_messages), CronTrigger(hour=6, minute=15))
     scheduler.add_job(lambda: send_random_message(afternoon_messages), CronTrigger(hour=15, minute=0))
-    scheduler.add_job(lambda: send_random_message(evening_messages), CronTrigger(hour=21, minute=0))
+    scheduler.add_job(lambda: send_random_message(evening_messages), CronTrigger(hour=21, minute=30))
 
     # 4 zufällige Flirty-Nachrichten zwischen 7–20 Uhr
     flirty_hours = sorted(random.sample(range(7, 20), 4))
