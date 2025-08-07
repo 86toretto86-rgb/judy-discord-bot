@@ -151,3 +151,4 @@ async def on_ready():
 
     scheduler.start()
 
+bot.run(TOKEN)
