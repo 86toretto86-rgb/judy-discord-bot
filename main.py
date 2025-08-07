@@ -144,5 +144,3 @@ async def on_ready():
 
     scheduler.start()
 
-# Token setzen und Bot starten
-bot.run(TOKEN)
