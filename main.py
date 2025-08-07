@@ -6,6 +6,13 @@ import pytz
 import random
 import asyncio
 from typing import Optional
+import os
+
+TOKEN = os.environ.get('TOKEN')
+
+if TOKEN is None:
+    print("❌ Kein TOKEN in den Umgebungsvariablen gefunden!")
+    exit(1)
 
 
 
