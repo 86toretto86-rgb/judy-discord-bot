@@ -120,31 +120,6 @@ async def send_random_message(message_list):
         message = random.choice(message_list)
         await bot.channel.send(message)
 
-# Keep-Alive Task: sendet alle 5 Minuten ein Zeichen in Channel "keep-alive"
-async def keep_alive_task():
-    await bot.wait_until_ready()
-    keep_alive_channel = None
-
-    for guild in bot.guilds:
-        for channel in guild.text_channels:
-            if channel.name == "keep-alive":
-                keep_alive_channel = channel
-                print(f"Keep-Alive Nachrichten werden in #{channel.name} gesendet.")
-                break
-        if keep_alive_channel:
-            break
-
-    if not keep_alive_channel:
-        print("❌ Keep-Alive Channel wurde nicht gefunden.")
-        return
-
-    while not bot.is_closed():
-        try:
-            await keep_alive_channel.send("🔵")  # Beispiel-Nachricht
-        except Exception as e:
-            print(f"Fehler beim Senden der Keep-Alive Nachricht: {e}")
-        await asyncio.sleep(30)  # 5 Minuten warten
-
 # Aufgabenplanung
 @bot.event
 async def on_ready():
@@ -168,9 +143,6 @@ async def on_ready():
         scheduler.add_job(lambda: send_random_message(flirty_messages), CronTrigger(hour=hour, minute=0))
 
     scheduler.start()
-
-    # Keep-Alive Task starten
-    bot.loop.create_task(keep_alive_task())
 
 # Token setzen und Bot starten
 bot.run(TOKEN)
